@@ -3,7 +3,8 @@ import requests
 
 API_URL = "https://api.weatherapi.com/v1/current.json"
 
-def get_weather() -> None:
+
+def get_weather() -> dict:
     api_key = os.getenv("API_KEY")
 
     if not api_key:
@@ -20,18 +21,20 @@ def get_weather() -> None:
     return response.json()
 
 
-
-def main():
+def main() -> None:
     weather = get_weather()
 
     location = weather["location"]
     current = weather["current"]
 
     print(
-        f"{location['name']}/{location['country']} "
-        f"{location['localtime']} "
-        f"Weather: {current['temp_c']} Celsius, "
-        f"{current['condition']['text']}"
+        "{}/{} {} Weather: {} Celsius, {}".format(
+            location["name"],
+            location["country"],
+            location["localtime"],
+            current["temp_c"],
+            current["condition"]["text"],
+        )
     )
 
 
