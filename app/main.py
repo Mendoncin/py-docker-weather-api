@@ -7,7 +7,7 @@ API_URL = "https://api.weatherapi.com/v1/current.json"
 CITY = "Paris"
 
 
-def get_weather():
+def get_weather() -> dict:
     api_key = os.getenv("API_KEY")
 
     if not api_key:
@@ -24,7 +24,7 @@ def get_weather():
     return response.json()
 
 
-def main():
+def main() -> None:
     weather = get_weather()
 
     location = weather["location"]
